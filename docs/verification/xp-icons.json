@@ -1,0 +1,78 @@
+[
+  {
+    "group_id": "ICON_1",
+    "language": 1033,
+    "count": 9,
+    "ico": "xp-group-ICON_1-1033.ico",
+    "png": "xp-group-ICON_1-1033.png",
+    "frames": [
+      {
+        "width": 48,
+        "height": 48,
+        "bpp": 4,
+        "resource_id": 1,
+        "payload_sha256": "9201e9408187ce5ea7761c0b340f759c1dbf2d20676333d3b5b117cd5950f3ea"
+      },
+      {
+        "width": 32,
+        "height": 32,
+        "bpp": 4,
+        "resource_id": 2,
+        "payload_sha256": "d0003c8b39e9c28825137c8a1d8bbd9cfb249671dc873a9dc6091e307dddc0a6"
+      },
+      {
+        "width": 16,
+        "height": 16,
+        "bpp": 4,
+        "resource_id": 3,
+        "payload_sha256": "eab8f57e9e7d6457c8b326b2e1b772fecc4671765654b4e13193d52fcf055525"
+      },
+      {
+        "width": 48,
+        "height": 48,
+        "bpp": 8,
+        "resource_id": 4,
+        "payload_sha256": "1a38a42a0c80897c1c25307233e9ee47feca861bd84e3d2e7a137241c585abd8"
+      },
+      {
+        "width": 32,
+        "height": 32,
+        "bpp": 8,
+        "resource_id": 5,
+        "payload_sha256": "af3841464daff0e273574e6477b685abcd3b8cb623643a3b35e7e03d233dc127"
+      },
+      {
+        "width": 16,
+        "height": 16,
+        "bpp": 8,
+        "resource_id": 6,
+        "payload_sha256": "6c31ccc3db0ed3c298a61cc2bddd6eada45345823f71827e49252f9610adae06"
+      },
+      {
+        "width": 48,
+        "height": 48,
+        "bpp": 32,
+        "resource_id": 7,
+        "payload_sha256": "e636ac433cef891e7258243c9dfe9741ed448dd507680628d6dbd62322d344e3"
+      },
+      {
+        "width": 32,
+        "height": 32,
+        "bpp": 32,
+        "resource_id": 8,
+        "payload_sha256": "1fbb084c6247ab3f76543afcba99ae297709f1961293820144af7e79e994a527"
+      },
+      {
+        "width": 16,
+        "height": 16,
+        "bpp": 32,
+        "resource_id": 9,
+        "payload_sha256": "3b7055dd67b55265ea8271e8ba9b5eb0a517a998063a59444ae3bb71fcf12fc2"
+      }
+    ],
+    "ico_sha256": "1ebdd10aad7ff3f465eeafa285a06e448788b5b89ab6a212113e58435db7c16e",
+    "chosen_width": 48,
+    "chosen_height": 48,
+    "chosen_bpp": 32
+  }
+]

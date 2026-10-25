@@ -1,0 +1,14 @@
+{
+  "operation": "Replace launch icon regions only",
+  "previous_bda_sha256": "a62c393029a9ea07dc06cb434095b37a5278192870ff071ad6c247bcfa94660e",
+  "bda_sha256": "a2dbec6fbe098badf5aa7e71e94ab2ab7ea109628a6f5414c6d78ddafaad1c7a",
+  "size": 249448,
+  "icon_start": 136,
+  "entry_offset": 38392,
+  "engine_payload_sha256": "d7f8f22daa23d979a3a1d574a7c89c7bb515ed3a65ace9507e8c0df0f683e349",
+  "engine_payload_unchanged": true,
+  "header_unchanged": true,
+  "source": "Original silver pinball icon from SpaceCadetPinball",
+  "source_png_sha256": "9063f1d434e8e6e74ef7ffb3f92ca5ced97bc30824b5b396e052acee7ea7998d",
+  "validated": true
+}

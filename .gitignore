@@ -1,0 +1,17 @@
+/sdk/.toolchain/
+/original-data/
+/build-native/
+/dist/
+/dist-local/
+/qa/
+/.venv/
+__pycache__/
+*.py[cod]
+*.bda
+*.elf
+*.o
+*.exe
+*.SAV
+*.bin
+*.zip
+*.log

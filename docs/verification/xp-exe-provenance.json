@@ -1,0 +1,9 @@
+{
+  "source": "https://archive.org/download/3d-pinball-space-cadet_202103/3D%20Pinball%20Space%20Cadet.zip",
+  "archive_entry": "3D Pinball Space Cadet/PINBALL.EXE",
+  "size": 281088,
+  "sha1": "2a5b525e0f631bb6107639e2a69df15986fb0d05",
+  "sha256": "2bbc8234685fe2f6324040af6ea20123cf00c4a56882ce0d9074f0beefac67bc",
+  "execution": "Not executed; static PE-resource extraction only",
+  "reference": "https://github.com/k4zmu2a/SpaceCadetPinball#source"
+}

@@ -1,0 +1,116 @@
+name: Build and release Space Cadet 9588
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pinball-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref_type != 'tag' }}
+
+jobs:
+  host-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Test resource archive and file cache without proprietary data
+        run: python native/test_file_cache.py --cc gcc
+
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: '1'
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          submodules: false
+      - name: Initialize fixed SDK only
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $PSNativeCommandUseErrorActionPreference = $true
+          git submodule update --init --depth 1 -- sdk
+          $expected = git rev-parse HEAD:sdk
+          $actual = git -C sdk rev-parse HEAD
+          if ($expected -ne $actual) { throw 'SDK gitlink mismatch' }
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Validate version tag
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+        run: |
+          if ($env:REF_TYPE -eq 'tag') {
+            $version = (Get-Content VERSION -Raw).Trim()
+            if ($env:RELEASE_TAG -notmatch '^v\d+\.\d+\.\d+$' -or $env:RELEASE_TAG -ne "v$version") {
+              throw 'Tag must match VERSION (vMAJOR.MINOR.PATCH)'
+            }
+          }
+      - name: Install hash-verified GCC 15.2.0
+        run: ./sdk/scripts/setup_toolchain.ps1
+      - name: Build and package without original game data
+        run: ./build.ps1
+      - name: Verify final file checksums
+        run: python scripts/verify_checksums.py dist
+      - name: Upload exact release files
+        uses: actions/upload-artifact@v7
+        with:
+          name: space-cadet9588
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    needs: [build, host-tests]
+    runs-on: windows-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v8
+        with:
+          name: space-cadet9588
+          path: release-assets
+      - name: Verify downloaded files
+        run: python scripts/verify_checksums.py release-assets
+      - name: Create release without overwriting existing assets
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $assets = Get-ChildItem -LiteralPath release-assets -File | ForEach-Object { $_.FullName }
+          $releaseArgs = @('release', 'create', $env:RELEASE_TAG) + $assets + @(
+            '--repo', $env:GITHUB_REPOSITORY,
+            '--verify-tag', '--title', "Space Cadet 9588 $env:RELEASE_TAG",
+            '--notes-file', 'RELEASE_NOTES.md'
+          )
+          if ($env:RELEASE_TAG -like 'v0.*') { $releaseArgs += '--prerelease' }
+          gh @releaseArgs
+          if ($LASTEXITCODE) { throw 'Release creation failed; existing assets were not overwritten' }

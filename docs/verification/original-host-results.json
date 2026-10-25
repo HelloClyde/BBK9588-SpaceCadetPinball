@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "feed_frames_120hz": 720,
+  "table_width": 365,
+  "table_height": 470,
+  "score": 32000,
+  "best": 32000,
+  "ball_count": 2,
+  "max_speed": 109.224,
+  "moving_frames": 2067
+}
