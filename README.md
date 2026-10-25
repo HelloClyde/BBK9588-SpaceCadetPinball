@@ -6,9 +6,10 @@
 
 ## 快速开始
 
-当前版本 `0.1.0` 处于本地发布准备阶段，尚未发布 Release。
-先按下方命令构建，程序在 `dist/SpaceCadet9588.bda`，安装 ZIP 在
-`dist/SpaceCadet9588-0.1.0.zip`。ZIP 不含原版 DAT/WAV。
+预览版 `v0.1.0` 从 [GitHub Release](https://github.com/HelloClyde/BBK9588-SpaceCadetPinball/releases/tag/v0.1.0)
+下载。选择 `SpaceCadet9588-0.1.0.zip` 安装包，或单独下载 `SpaceCadet9588.bda`。
+ZIP 不含原版 DAT/WAV；同页的 `SHA256SUMS.txt` 可用于核对下载文件。
+也可按下方命令自行构建，输出位于 `dist/`。
 
 1. 将 ZIP 中的 `应用` 目录复制到设备存储根目录，合并目录。
 2. 另将生成的 `PINBALL.PAK` 放到 `应用/数据/游戏/Pinball/`。
@@ -40,6 +41,8 @@ B 盘路径已实现；现有模拟器验证覆盖 A 盘，B 盘和真机运行�
 在本仓库根目录运行，先安装 Git 和 Python 3.12 或更新版本：
 
 ```powershell
+git clone https://github.com/HelloClyde/BBK9588-SpaceCadetPinball.git
+cd BBK9588-SpaceCadetPinball
 git submodule update --init --depth 1 -- sdk
 .\sdk\scripts\setup_toolchain.ps1
 .\build.ps1
@@ -114,7 +117,8 @@ python verify_original_emulator.py --emulator-root '模拟器目录' --require-b
 GitHub Actions 配置包含 main / PR / 手动构建与 `vMAJOR.MINOR.PATCH` 标签 Release。
 CI 只构建和静态校验、运行不依赖原版数据的缓存测试，不宣称通过模拟器测试。
 正式发布使用同次构建的 BDA、ZIP、`BUILDINFO.json` 和 `SHA256SUMS.txt`。
-workflow 尚未在远端运行。公开发布前还需明确原版图标的再分发许可；详见来源声明。
+实际构建状态见 [Actions](https://github.com/HelloClyde/BBK9588-SpaceCadetPinball/actions)。
+原版图标的独立再分发许可未确认，不在本仓库 MIT 授权范围内；详见来源声明。
 
 ## 感谢
 
