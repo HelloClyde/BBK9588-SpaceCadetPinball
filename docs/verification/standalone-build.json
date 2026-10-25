@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "date": "2026-10-25",
+  "clean_checkout": true,
+  "build": {
+    "upstream_commit": "cb9b7b886244a27773f66b0b19fdc2998392565e",
+    "bda": "SpaceCadet9588.bda",
+    "size": 249448,
+    "sha256": "61ce686b07777274d144d109119778414cb33814d3ae1b87cd5d569ed0f0683c",
+    "simulation": "original SpaceCadetPinball engine",
+    "units": 59,
+    "global_constructor_entries": 4,
+    "architecture": "MIPS32 little-endian software floating point",
+    "sdk_commit": "f2fcbe020e7e94014c33d7e5c593802e4b1e3034",
+    "engine_payload_sha256": "d7f8f22daa23d979a3a1d574a7c89c7bb515ed3a65ace9507e8c0df0f683e349",
+    "toolchain": "mipsel-none-elf-gcc.exe (GCC) 15.2.0"
+  },
+  "matches_existing_delivery": true,
+  "host_engine_test": "PASS",
+  "file_cache_test": "PASS",
+  "workflow_remote_run": false,
+  "hardware_tested": false
+}

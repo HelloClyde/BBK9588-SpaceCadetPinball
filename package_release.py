@@ -36,8 +36,8 @@ def main():
     target = ROOT / ('dist-local' if args.with_data else 'dist')
     target.mkdir(exist_ok=True)
     files = {'应用/程序/太空弹球.bda': binary}
-    for name in ['LICENSE', 'SOURCE_NOTICE.md', 'INSTALL.md', 'licenses/Apache-2.0.txt', 'native/engine/LICENSE']:
-        files[name] = (ROOT / name).read_bytes()
+    for name in ['LICENSE', 'SOURCE_NOTICE.md', 'INSTALL.md', 'licenses/Apache-2.0.txt', 'licenses/SDK-NOTICE.txt', 'native/engine/LICENSE']:
+        files[name] = (ROOT / name).read_text(encoding='utf8').encode('utf8')
     if args.with_data:
         import subprocess
         import sys

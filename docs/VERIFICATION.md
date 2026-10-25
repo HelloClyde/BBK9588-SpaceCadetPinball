@@ -19,6 +19,21 @@ d7f8f22daa23d979a3a1d574a7c89c7bb515ed3a65ace9507e8c0df0f683e349
 BDA 标题为“太空弹球”、分类为游戏，四档 VX 图标、入口、大小和 checksum 静态校验通过。
 `build-native/build.json` 与交付 `dist/BUILDINFO.json` 记录实际编译器、SDK、上游和哈希。
 
+已在仅含提交文件和固定 SDK 的干净检出中验证：
+
+```powershell
+.\sdk\scripts\setup_toolchain.ps1
+.\build.ps1
+python scripts/verify_checksums.py dist
+```
+
+工具链安装测试复用相同的本地缓存归档，经过脚本的 SHA-256 验证：
+`8ba866e25c9826ee04ab4310365d264e3e73769e3738bb58ae38fd6740b7ee8d`。
+构建没有读取原工作区或原版游戏数据。源码空白规范化后，BDA 仍与交付版完全一致。
+本次重新运行的原版引擎宿主测试和 FILE/PAK 缓存行为测试均通过。
+默认 ZIP 逐项检查不含 DAT、WAV、PAK、EXE、固件或个人存档。
+README 截图和相对链接、Python 语法、PowerShell 构建语法、workflow YAML 结构均已检查。
+
 ## 复用的完整固件模拟器证据
 
 环境：bbk9588-emulator v0.1.5、完整 C200 固件、独立 baseline v1.2.0 NAND 副本。

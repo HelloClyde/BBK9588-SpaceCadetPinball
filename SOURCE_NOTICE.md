@@ -7,7 +7,7 @@
 | --- | --- | --- |
 | `native/engine/` 原版开源引擎 | [k4zmu2a/SpaceCadetPinball](https://github.com/k4zmu2a/SpaceCadetPinball/tree/cb9b7b886244a27773f66b0b19fdc2998392565e)，`cb9b7b886244a27773f66b0b19fdc2998392565e` | MIT，保留 `native/engine/LICENSE`；已替换平台、部分头文件及翻译适配 |
 | `sdk/` | [HelloClyde/bbk9588-bda-sdk](https://github.com/HelloClyde/bbk9588-bda-sdk)，`f2fcbe020e7e94014c33d7e5c593802e4b1e3034` | SDK 自带 Apache-2.0，子模块固定提交 |
-| `native/sdk_compat.h` | SDK 开发工作区已验证的 FS+0x074 刷盘封装 | Apache-2.0，见 `licenses/Apache-2.0.txt`；只保留此接口，未依赖其他未提交 SDK 改动 |
+| `native/sdk_compat.h` | SDK 开发工作区已验证的 FS+0x074 刷盘封装 | Apache-2.0，见 `licenses/Apache-2.0.txt` 与 `licenses/SDK-NOTICE.txt`；只保留此接口，未依赖其他未提交 SDK 改动 |
 | 原版 DAT、位图、字体、MIDI、60 个 WAV | 固定资源清单见 `assets/original-resources.json`；先前验证来源为 [lrusso/3DPinballSpaceCadet](https://github.com/lrusso/3DPinballSpaceCadet/tree/684f0b57d0cc93d5a29329f0b59d9996c54f1553) | 原游戏第三方素材，未确认独立再分发许可；不包含于源码或默认安装包，不套用 MIT / Apache-2.0 |
 | `windows_xp_pinball.ico`、`original_icon.png` 与 BDA 菜单图标 | 经哈希核验的 Windows XP `PINBALL.EXE` 静态提取 | 原游戏第三方图标；未确认独立再分发许可，**不包含在 MIT 授权中** |
 | `docs/screenshots/` | 本移植在完整 C200 固件模拟器中的实际截图 | 用于运行展示；其中原游戏美术仍属原权利人，不由本仓库重新授权 |
