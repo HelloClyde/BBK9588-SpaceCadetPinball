@@ -339,5 +339,17 @@
       "sha256": "45e9471c6bee296f231de1645c5c538b58493110c9aa9a28c7ffe01ca3f95019"
     }
   ],
-  "sound_files": 60
+  "sound_files": 60,
+  "resource_pack": {
+    "name": "PINBALL.PAK",
+    "format": "SCPAK01",
+    "size": 2179543,
+    "sha256": "42c8616ba5a5dcfc8499a2b5f87ca0280b5287279175c5eff620807314f02f4d",
+    "file_count": 66
+  },
+  "redistribution": {
+    "authorization_confirmed_by": "project maintainer",
+    "confirmation_date": "2026-10-28",
+    "scope": "Include original game resources in this project release ZIP as requested by the maintainer; original rights retained, no MIT/Apache relicensing"
+  }
 }

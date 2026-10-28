@@ -53,27 +53,39 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate version tag
+        id: version
         env:
           RELEASE_TAG: ${{ github.ref_name }}
           REF_TYPE: ${{ github.ref_type }}
         run: |
+          $version = (Get-Content VERSION -Raw).Trim()
+          if ($version -notmatch '^\d+\.\d+\.\d+$') { throw 'Invalid VERSION' }
+          "version=$version" >> $env:GITHUB_OUTPUT
           if ($env:REF_TYPE -eq 'tag') {
-            $version = (Get-Content VERSION -Raw).Trim()
             if ($env:RELEASE_TAG -notmatch '^v\d+\.\d+\.\d+$' -or $env:RELEASE_TAG -ne "v$version") {
               throw 'Tag must match VERSION (vMAJOR.MINOR.PATCH)'
             }
           }
       - name: Install hash-verified GCC 15.2.0
         run: ./sdk/scripts/setup_toolchain.ps1
-      - name: Build and package without original game data
+      - name: Verify all original game resources
+        run: python resource_archive.py
+      - name: Build complete install ZIP with original game data
         run: ./build.ps1
-      - name: Verify final file checksums
-        run: python scripts/verify_checksums.py dist
+      - name: Verify final checksums and complete install contents
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          python scripts/verify_checksums.py dist
+          python scripts/verify_install_zip.py dist
       - name: Upload exact release files
         uses: actions/upload-artifact@v7
         with:
           name: space-cadet9588
-          path: dist/*
+          path: |
+            dist/SpaceCadet9588.bda
+            dist/SpaceCadet9588-${{ steps.version.outputs.version }}.zip
+            dist/BUILDINFO.json
+            dist/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
 
@@ -96,8 +108,12 @@ jobs:
         with:
           name: space-cadet9588
           path: release-assets
-      - name: Verify downloaded files
-        run: python scripts/verify_checksums.py release-assets
+      - name: Verify downloaded checksums and complete install contents
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          python scripts/verify_checksums.py release-assets
+          python scripts/verify_install_zip.py release-assets
       - name: Create release without overwriting existing assets
         shell: pwsh
         env:
